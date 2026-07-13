@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+*.so
+
+# uv / venv
+.venv/
+.python-version
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# env / secrets
+.env
+.env.*
+!.env.example
+
+# ruff / mypy
+.ruff_cache/
+.mypy_cache/
+
+# LangGraph / agent runtime cruft
+.langgraph/
+*.db
+*.db-journal
+
+# agent workspace (FilesystemBackend outputs) — keep the dir, ignore contents
+template/src/agentforge_template/agents/*/workspace/*
+!**/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/

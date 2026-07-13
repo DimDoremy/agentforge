@@ -1,0 +1,24 @@
+# keep image lean — exclude dev/runtime cruft from the build context
+.git
+.gitignore
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.langgraph
+*.db
+*.db-journal
+
+# env never goes into the image
+.env
+.env.*
+
+# agent scratch (runtime writes, not source)
+src/agentforge_template/agents/*/workspace
+
+# docs/skills are for agents & humans, not the runtime image
+docs
+skills
+README.md

@@ -1,0 +1,58 @@
+# Production compose — reproducible, no source mount, restart-safe.
+#
+# Run:  docker compose -f docker-compose.prod.yml up -d
+#
+# Same single-Postgres topology as dev, but: built prod image (--frozen --no-dev),
+# no source mount, no published DB port, restart policy. Tier-2 extensions
+# (PgBouncer, anonymizer, audit, backup) are opt-in via profile/build-arg; see
+# skills/postgres-as-platform/references/extension-tiers.md.
+
+services:
+  postgres:
+    build:
+      context: docker
+      dockerfile: postgres.Dockerfile
+    environment:
+      POSTGRES_USER: ${DB_USER:?DB_USER must be set in prod}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD must be set in prod}
+      POSTGRES_DB: ${DB_NAME:?DB_NAME must be set in prod}
+    command: >
+      postgres
+      -c shared_preload_libraries=pg_cron
+      -c cron.database_name=${DB_NAME}
+    volumes:
+      - pgdata_prod:/var/lib/postgresql/data
+    # NOTE: no `ports:` — the DB stays internal to the compose network.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: prod
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_DSN: ${DB_DSN:?DB_DSN must be set in prod}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      MODEL: ${MODEL:?MODEL must be set in prod}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      PORT: ${PORT:-8000}
+      HOST: ${HOST:-0.0.0.0}
+    env_file:
+      - .env
+    # NOTE: no source mount; the built image carries the code.
+    ports:
+      - "${PORT:-8000}:8000"
+    restart: unless-stopped
+
+volumes:
+  pgdata_prod:

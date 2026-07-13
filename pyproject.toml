@@ -1,0 +1,20 @@
+# Top-level project config for the agentforge *pack*.
+#
+# This is intentionally minimal: it only needs pytest to run the structural
+# meta-tests in tests/ (which validate the skill pack, NOT the template code).
+# The runnable code skeleton lives in template/ with its own, full pyproject.toml.
+
+[project]
+name = "agentforge"
+version = "0.1.0"
+description = "A reusable harness-engineering pack for workflow-level AI agents (FastAPI + LangGraph + DeepAgents, single Postgres)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[dependency-groups]
+dev = ["pytest>=8.3"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

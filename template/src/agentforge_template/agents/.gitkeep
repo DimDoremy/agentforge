@@ -1,0 +1,14 @@
+# Agent modules live here, one directory per agent.
+#
+# Add the first agent (see skills/harness-core/references/adding-an-agent.md):
+#   src/agentforge_template/agents/<name>/
+#       __init__.py    # exports `graph`
+#       graph.py       # create_deep_agent(...)
+#       tools.py       # @tool functions = workflow steps
+#       AGENTS.md      # identity/system prompt
+#       skills/        # on-demand process docs (optional)
+#       workspace/     # FilesystemBackend scratch (gitignored)
+#
+# Then register it in BOTH:
+#   - langgraph.json   (the runtime's source of truth)
+#   - registry.py      (the FastAPI layer's source of truth)

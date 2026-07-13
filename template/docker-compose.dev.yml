@@ -1,0 +1,61 @@
+# Development compose — fast feedback, live editing, host-side DB access.
+#
+# Run:  docker compose -f docker-compose.dev.yml up
+#
+# Two services: postgres (Tier-1 extensions) + agent (dev target, source mount,
+# reload). No Redis / vector DB / broker — Postgres is the single platform.
+# See skills/dev-workflow/references/dev-vs-prod.md.
+
+services:
+  postgres:
+    build:
+      context: docker
+      dockerfile: postgres.Dockerfile
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-agentforge}
+    # pg_cron must be preloaded; set the DB it manages.
+    command: >
+      postgres
+      -c shared_preload_libraries=pg_cron
+      -c cron.database_name=${DB_NAME:-agentforge}
+    volumes:
+      - pgdata_dev:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"   # host-side tools (psql, GUI); see networking-rules.md
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-agentforge}"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_DSN: ${DB_DSN:-postgresql://postgres:postgres@postgres:5432/agentforge?sslmode=disable}
+      DB_NAME: ${DB_NAME:-agentforge}
+      DB_USER: ${DB_USER:-postgres}
+      MODEL: ${MODEL:-openai:gpt-4o-mini}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      PORT: ${PORT:-8000}
+      HOST: ${HOST:-0.0.0.0}
+    env_file:
+      - .env
+    volumes:
+      # source mount → hot reload in `langgraph dev`
+      - .:/app
+      # keep the venv out of the bind mount
+      - /app/.venv
+    ports:
+      - "${PORT:-8000}:8000"
+
+volumes:
+  pgdata_dev:
