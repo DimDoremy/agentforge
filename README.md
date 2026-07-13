@@ -3,6 +3,9 @@
 > 工作流级 AI agent 的开发 harness engineering 包。
 > A reusable harness-engineering pack for building small, workflow-level AI agents (AI customer-service, customer research, multi-platform publishing, …) on **FastAPI + LangChain + LangGraph + DeepAgents**, with **uv** for env management and **docker-compose** (split dev/prod) for runtime.
 
+> **快速安装（全局，所有项目可用）：** `npx skills add DimDoremy/agentforge --global`
+> 所有安装方式见 [`INSTALL.md`](INSTALL.md)（全局 / 项目本地 / 单个 skill）。
+
 ## 这是什么 / What this is
 
 `agentforge` 不是"一个跑着 demo 的单体 app"，而是一个**可引入的 harness engineering 包**，由两层组成：
@@ -37,7 +40,22 @@
 
 ### 作为 skill 包导入新项目
 
-见 [`docs/import-guide.md`](docs/import-guide.md)。简言之：把 `skills/` 链接/拷贝到目标项目的 agent skills 目录（如 `~/.zcode/skills/`），全局预配置后，agent 在新项目里就会按 `dev-workflow` 的流程做 harness engineering 规划。
+**推荐：用 [`npx skills`](https://github.com/vercel-labs/skills)（跨 ZCode / Claude Code / Codex / Cursor 等 70+ agent）：**
+
+```bash
+# 全局：装一次，所有项目可用
+npx skills add DimDoremy/agentforge --global
+
+# 或项目本地：只装到当前项目
+npx skills add DimDoremy/agentforge
+
+# 或单个 skill：
+npx skills add DimDoremy/agentforge --skill postgres-as-platform --global
+```
+
+`npx skills` 自动检测你的 agent 并把 skill 装到正确位置（全局如 `~/.zcode/skills/`，项目本地如 `.zcode/skills/`）。完整选项见 [`INSTALL.md`](INSTALL.md)；手动链接/拷贝方式见 [`docs/import-guide.md`](docs/import-guide.md)。
+
+装好后，agent 在新项目里就会按 `dev-workflow` 的流程做 harness engineering 规划。
 
 ### 直接跑骨架
 
