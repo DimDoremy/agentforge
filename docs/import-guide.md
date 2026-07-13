@@ -12,7 +12,7 @@ ln -s /path/to/agentforge/skills/harness-core        ~/.zcode/skills/harness-cor
 ln -s /path/to/agentforge/skills/postgres-as-platform ~/.zcode/skills/postgres-as-platform
 ln -s /path/to/agentforge/skills/fastapi-serving     ~/.zcode/skills/fastapi-serving
 ln -s /path/to/agentforge/skills/deepagent-authoring ~/.zcode/skills/deepagent-authoring
-ln -s /path/to/agentforge/skills/dev-workflow        ~/.zcode/skills/dev-workflow
+ln -s /path/to/agentforge/skills/harness-workflow        ~/.zcode/skills/harness-workflow
 ```
 
 Each `SKILL.md`'s `description` ("Use when…") becomes a routing trigger; the host
@@ -35,7 +35,7 @@ global config so **every** new project gets them automatically. This is the
 ## After importing
 
 In the target project, the agent will:
-1. Match `dev-workflow` at the start of harness work → scaffold from `template/`.
+1. Match `harness-workflow` at the start of harness work → scaffold from `template/`.
 2. Follow the 3-step recipe (`harness-core`) to add agents.
 3. Route persistence/queue/vector decisions through `postgres-as-platform`.
 4. Expose agents via `fastapi-serving`; write them per `deepagent-authoring`.

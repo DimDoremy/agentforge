@@ -1,6 +1,6 @@
 ---
 name: harness-core
-description: Use at the START of any task that builds, extends, or explains an agent harness in an agentforge project — i.e. the reusable pack for workflow-level AI agents on FastAPI + LangChain + LangGraph + DeepAgents (uv-managed, docker-compose split dev/prod, single-Postgres with pgvector/pgai/pgmq/pg_cron). Owns the technology-stack overview, the two-layer structure (skills/ pack + template/ skeleton), the fixed 3-step recipe for adding a new agent, and the cross-skill routing rules. Delegates persistence/queue/vector/scheduling specifics to the postgres-as-platform skill, HTTP serving to fastapi-serving, agent authoring to deepagent-authoring, and the development lifecycle to dev-workflow.
+description: Use when building, extending, or explaining the agentforge harness for workflow-level AI agents (FastAPI + LangGraph + DeepAgents, single Postgres). Owns the tech-stack overview, the two-layer structure, the 3-step add-agent recipe, and cross-skill routing.
 ---
 
 # harness-core
@@ -11,7 +11,7 @@ description: Use at the START of any task that builds, extends, or explains an a
 
 It has two layers:
 
-- **层 A — `skills/` (the core deliverable):** five lerdrail-style skills (this file + `postgres-as-platform` + `fastapi-serving` + `deepagent-authoring` + `dev-workflow`). Each `SKILL.md` has YAML front-matter `name` + a `description` trigger ("Use when…"); details live in sibling `references/*.md` loaded on demand (progressive disclosure, to control token cost).
+- **层 A — `skills/` (the core deliverable):** five lerdrail-style skills (this file + `postgres-as-platform` + `fastapi-serving` + `deepagent-authoring` + `harness-workflow`). Each `SKILL.md` has YAML front-matter `name` + a `description` trigger ("Use when…"); details live in sibling `references/*.md` loaded on demand (progressive disclosure, to control token cost).
 - **层 B — `template/`:** a minimal, runnable code skeleton (`uv sync` / `docker compose` / `pytest` all green). New projects start here; the skills describe how to instantiate and extend it.
 
 Every agent in this harness is one `create_deep_agent(...)` instance. A workflow's steps/branches are expressed as **tools** (= workflow steps), **skills** (= process docs), and **system_prompt** (= flow definition), then exposed over HTTP by the LangGraph Platform runtime + a thin FastAPI app.
@@ -31,7 +31,7 @@ This skill owns the **map and the routing rules**. It does not own any concrete 
 - Persistence / queue / vector / scheduling → [postgres-as-platform](../postgres-as-platform/SKILL.md).
 - HTTP serving / endpoints / request shapes → [fastapi-serving](../fastapi-serving/SKILL.md).
 - Writing a deepagent / tools-as-steps / skills format → [deepagent-authoring](../deepagent-authoring/SKILL.md).
-- Scaffolding / testing gates / dev-vs-prod / quality gates → [dev-workflow](../dev-workflow/SKILL.md).
+- Scaffolding / testing gates / dev-vs-prod / quality gates → [harness-workflow](../harness-workflow/SKILL.md).
 
 When two layers could plausibly apply, prefer the more specific one. `harness-core` is only the entry point.
 
@@ -57,7 +57,7 @@ Mirrors lerdrail's "drop a `SKILL.md` directory" convention. Full template: [ref
 | Add a new workflow agent | [references/adding-an-agent.md](references/adding-an-agent.md) |
 | Decide where a capability lives | decision tables in [postgres-as-platform](../postgres-as-platform/SKILL.md) |
 | Expose an agent over HTTP | [fastapi-serving](../fastapi-serving/SKILL.md) |
-| Start a brand-new project from this pack | [dev-workflow](../dev-workflow/SKILL.md) |
+| Start a brand-new project from this pack | [harness-workflow](../harness-workflow/SKILL.md) |
 
 ## Common mistakes
 

@@ -43,4 +43,4 @@ curl localhost:8000/agents   # -> []   (empty registry, as expected)
 
 ## Rename for a new project
 
-See [`../skills/dev-workflow/references/scaffolding.md`](../skills/dev-workflow/references/scaffolding.md).
+See [`../skills/harness-workflow/references/scaffolding.md`](../skills/harness-workflow/references/scaffolding.md).

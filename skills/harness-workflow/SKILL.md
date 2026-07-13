@@ -1,9 +1,9 @@
 ---
-name: dev-workflow
-description: Use at the START of any harness-engineering work in an agentforge project — scaffolding a new project from the template, adding/extending an agent, running the testing & quality gates, distinguishing dev vs prod, or committing. Orchestrates the lifecycle (scaffold → build → test gates → dev/prod run → quality gates) and defers mechanism to the other four skills. Owns the testing-gate matrix per module type and the branch/commit discipline.
+name: harness-workflow
+description: Use when doing harness-engineering in an agentforge project — scaffolding from the template, adding/extending an agent, running testing and quality gates, or distinguishing dev vs prod. Orchestrates the lifecycle and defers mechanism to the other four skills.
 ---
 
-# dev-workflow
+# harness-workflow
 
 ## Overview
 
