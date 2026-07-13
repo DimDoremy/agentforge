@@ -11,7 +11,7 @@ description: Use when building, extending, or explaining the agentforge harness 
 
 It has two layers:
 
-- **层 A — `skills/` (the core deliverable):** five lerdrail-style skills (this file + `postgres-as-platform` + `fastapi-serving` + `deepagent-authoring` + `harness-workflow`). Each `SKILL.md` has YAML front-matter `name` + a `description` trigger ("Use when…"); details live in sibling `references/*.md` loaded on demand (progressive disclosure, to control token cost).
+- **层 A — `skills/` (the core deliverable):** five lerdrail-style skills (this file + `postgres-as-platform` + `fastapi-serving` + `deepagent-authoring` + `agentforge-workflow`). Each `SKILL.md` has YAML front-matter `name` + a `description` trigger ("Use when…"); details live in sibling `references/*.md` loaded on demand (progressive disclosure, to control token cost).
 - **层 B — `template/`:** a minimal, runnable code skeleton (`uv sync` / `docker compose` / `pytest` all green). New projects start here; the skills describe how to instantiate and extend it.
 
 Every agent in this harness is one `create_deep_agent(...)` instance. A workflow's steps/branches are expressed as **tools** (= workflow steps), **skills** (= process docs), and **system_prompt** (= flow definition), then exposed over HTTP by the LangGraph Platform runtime + a thin FastAPI app.
@@ -31,7 +31,7 @@ This skill owns the **map and the routing rules**. It does not own any concrete 
 - Persistence / queue / vector / scheduling → [postgres-as-platform](../postgres-as-platform/SKILL.md).
 - HTTP serving / endpoints / request shapes → [fastapi-serving](../fastapi-serving/SKILL.md).
 - Writing a deepagent / tools-as-steps / skills format → [deepagent-authoring](../deepagent-authoring/SKILL.md).
-- Scaffolding / testing gates / dev-vs-prod / quality gates → [harness-workflow](../harness-workflow/SKILL.md).
+- Scaffolding / testing gates / dev-vs-prod / quality gates → [agentforge-workflow](../agentforge-workflow/SKILL.md).
 
 When two layers could plausibly apply, prefer the more specific one. `harness-core` is only the entry point.
 
@@ -57,7 +57,7 @@ Mirrors lerdrail's "drop a `SKILL.md` directory" convention. Full template: [ref
 | Add a new workflow agent | [references/adding-an-agent.md](references/adding-an-agent.md) |
 | Decide where a capability lives | decision tables in [postgres-as-platform](../postgres-as-platform/SKILL.md) |
 | Expose an agent over HTTP | [fastapi-serving](../fastapi-serving/SKILL.md) |
-| Start a brand-new project from this pack | [harness-workflow](../harness-workflow/SKILL.md) |
+| Start a brand-new project from this pack | [agentforge-workflow](../agentforge-workflow/SKILL.md) |
 
 ## Common mistakes
 

@@ -1,9 +1,9 @@
 ---
-name: harness-workflow
+name: agentforge-workflow
 description: Use when doing harness-engineering in an agentforge project — scaffolding from the template, adding/extending an agent, running testing and quality gates, or distinguishing dev vs prod. Orchestrates the lifecycle and defers mechanism to the other four skills.
 ---
 
-# harness-workflow
+# agentforge-workflow
 
 ## Overview
 

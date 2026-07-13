@@ -29,7 +29,7 @@ npx skills add DimDoremy/agentforge
 npx skills add DimDoremy/agentforge --skill postgres-as-platform --global
 ```
 
-可装的 skill：`harness-core`、`postgres-as-platform`、`fastapi-serving`、`deepagent-authoring`、`harness-workflow`。不安装只列出：
+可装的 skill：`harness-core`、`postgres-as-platform`、`fastapi-serving`、`deepagent-authoring`、`agentforge-workflow`。不安装只列出：
 
 ```bash
 npx skills add DimDoremy/agentforge --list
@@ -54,7 +54,7 @@ npx skills remove postgres-as-platform -g   # 移除一个
 ## 装完之后
 
 skill 是只读约定，本身不执行代码。装好后，在新项目里 agent 会：
-1. 开工时匹配 `harness-workflow` → 按 harness 工程流程走
+1. 开工时匹配 `agentforge-workflow` → 按 harness 工程流程走
 2. 用 `harness-core` 的 3 步法添加 agent
 3. 持久化/队列/向量/调度决策走 `postgres-as-platform` 的决策矩阵
 4. 对外暴露走 `fastapi-serving`；编写 agent 走 `deepagent-authoring`

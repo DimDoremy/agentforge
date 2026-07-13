@@ -32,7 +32,7 @@
 | [`postgres-as-platform`](skills/postgres-as-platform/SKILL.md) | 单 PG 多能力、扩展分层模型、决策矩阵、网络规则 |
 | [`fastapi-serving`](skills/fastapi-serving/SKILL.md) | FastAPI + LangGraph runtime 对外暴露 agent |
 | [`deepagent-authoring`](skills/deepagent-authoring/SKILL.md) | 用 `create_deep_agent` 编写工作流 agent；工具=工作流步骤 |
-| [`harness-workflow`](skills/harness-workflow/SKILL.md) | harness 工程开发流程编排（脚手架→测试闸→dev/prod→质量闸） |
+| [`agentforge-workflow`](skills/agentforge-workflow/SKILL.md) | harness 工程开发流程编排（脚手架→测试闸→dev/prod→质量闸） |
 
 每个 `SKILL.md` 的 front-matter `description` 以 "Use when…" 开头，是 dispatcher 的路由键；正文保持简短，详情推到 `references/*.md` 按需加载（控 token，与 lerdrail 同构）。
 
@@ -55,7 +55,7 @@ npx skills add DimDoremy/agentforge --skill postgres-as-platform --global
 
 `npx skills` 自动检测你的 agent 并把 skill 装到正确位置（全局如 `~/.zcode/skills/`，项目本地如 `.zcode/skills/`）。完整选项见 [`INSTALL.md`](INSTALL.md)；手动链接/拷贝方式见 [`docs/import-guide.md`](docs/import-guide.md)。
 
-装好后，agent 在新项目里就会按 `harness-workflow` 的流程做 harness engineering 规划。
+装好后，agent 在新项目里就会按 `agentforge-workflow` 的流程做 harness engineering 规划。
 
 ### 直接跑骨架
 

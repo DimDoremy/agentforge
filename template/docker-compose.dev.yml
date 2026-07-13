@@ -4,7 +4,7 @@
 #
 # Two services: postgres (Tier-1 extensions) + agent (dev target, source mount,
 # reload). No Redis / vector DB / broker — Postgres is the single platform.
-# See skills/harness-workflow/references/dev-vs-prod.md.
+# See skills/agentforge-workflow/references/dev-vs-prod.md.
 
 services:
   postgres:

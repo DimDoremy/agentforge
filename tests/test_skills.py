@@ -21,7 +21,7 @@ EXPECTED_SKILLS = {
     "postgres-as-platform",
     "fastapi-serving",
     "deepagent-authoring",
-    "harness-workflow",
+    "agentforge-workflow",
 }
 
 _FRONTMATTER = re.compile(r"^---\n(?P<body>.*?)\n---\n", re.DOTALL)

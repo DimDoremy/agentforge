@@ -36,7 +36,7 @@ Both bring up exactly two services — `postgres` (Tier-1 extensions via
 3. runs `platform.setup_all()`,
 4. hands off to the runtime command.
 
-See [`skills/harness-workflow/references/dev-vs-prod.md`](../skills/harness-workflow/references/dev-vs-prod.md)
+See [`skills/agentforge-workflow/references/dev-vs-prod.md`](../skills/agentforge-workflow/references/dev-vs-prod.md)
 for the full field-by-field breakdown.
 
 ## Prod prerequisites

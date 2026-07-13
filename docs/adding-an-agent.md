@@ -56,7 +56,7 @@ graph = build_graph()
 
 Add `tests/agents/test_<name>.py` with a fake model
 (`GenericFakeChatModel`) so it runs without an API key — see
-[`skills/harness-workflow/references/testing-gates.md`](../skills/harness-workflow/references/testing-gates.md).
+[`skills/agentforge-workflow/references/testing-gates.md`](../skills/agentforge-workflow/references/testing-gates.md).
 
 ## Examples
 
